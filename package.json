@@ -1,0 +1,24 @@
+{
+  "name": "eventoL-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Official eventoL front-end",
+  "repository": "https://github.com/eventoL/eventoL-frontend",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "esformatter-align": "^0.1.5",
+    "esformatter-auto-wrap": "^0.1.0",
+    "esformatter-quotes": "^1.1.0",
+    "esformatter-use-strict": "^3.0.0",
+    "eslint": "^3.3.1",
+    "eslint-plugin-angular": "^1.3.1",
+    "eslint-plugin-html": "^1.5.2",
+    "http-server": "^0.6.1",
+    "shelljs": "^0.2.6"
+  },
+  "scripts": {
+    "postinstall": "bower update",
+    "prestart": "npm update"
+  }
+}

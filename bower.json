@@ -1,0 +1,15 @@
+{
+    "name": "eventoL-frontend",
+    "description": "Official eventoL front-end",
+    "version": "0.0.1",
+    "homepage": "https://github.com/eventoL/eventoL-frontend",
+    "license": "GPL-3.0",
+    "private": true,
+    "dependencies": {
+        "angular": "^1.5.5",
+        "angular-animate": "^1.5.5",
+        "angular-aria": "^1.5.5",
+        "angular-messages": "^1.5.5",
+        "angular-material": "git+https://github.com/angular/bower-material.git#master"
+    }
+}
