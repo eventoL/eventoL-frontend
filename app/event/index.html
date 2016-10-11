@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>eventoL</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css"/>
+        <link rel="stylesheet" href="../assets/app.css"/>
+    </head>
+
+    <body ng-app="eventoL" layout="column">
+        <md-toolbar ng-show="!showSearch" md-whiteframe="3">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>Event Title</span>
+                </h2>
+                <span flex></span>
+                <md-button class="md-tools" aria-label="Search" ng-click="showSearch = !showSearch">
+                    <md-icon aria-label="search" class="material-icons">search</md-icon>
+                </md-button>
+                <md-button class="md-tools" aria-label="Log In">
+                    Log in
+                </md-button>
+                <md-button class="md-accent md-raised md-hue-3" aria-label="Learn More">
+                    Entradas
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar ng-show="showSearch" md-whiteframe="3">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>Event Title</span>
+                </h2>
+                <md-button class="md-tools" aria-label="Go Back" ng-click="showSearch = !showSearch">
+                    <md-icon aria-label="keyboard_arrow_left" class="material-icons">keyboard_arrow_left</md-icon>
+                </md-button>
+                <md-autocomplete
+                    md-no-cache="false"
+                    md-selected-item="ctrl.selectedItem"
+                    md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                    md-search-text="ctrl.searchText"
+                    md-selected-item-change="ctrl.selectedItemChange(item)"
+                    md-items="item in ctrl.querySearch(ctrl.searchText)"
+                    md-item-text="item.display"
+                    md-min-length="0"
+                    placeholder="Start typing to search for events"
+                    flex>
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        No events matching "{{ctrl.searchText}}" were found.
+                    </md-not-found>
+                </md-autocomplete>
+                <md-button class="md-tools" aria-label="Log In">
+                    Log in
+                </md-button>
+                <md-button class="md-accent md-raised md-hue-3" aria-label="Learn More">
+                    Entradas
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-content>
+            <div class='md-padding' layout="column" layout-align="center center" layout-wrap ng-controller="eventsCtrl" flex="90" flex-offset="5">
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text class="title-card">
+                            <span class="md-subhead date-month">{{theEvent.date | date:'MMM' | uppercase}}</span>
+                            <span class="md-subhead date-day">{{theEvent.date | date:'dd'}}</span>
+                            <span class="md-headline event-title">{{theEvent.title}}</span>
+                            <span class="title-place">{{theEvent.place.name}}</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-lg card-media" back-img="'{{theEvent.img}}'"></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                </md-card>
+
+                <div layout="row" flex>
+                    <div flex="75">
+                        <md-card>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">About
+                                        {{theEvent.title}}</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>{{theEvent.description}}</p>
+                                <p>{{theEvent.description}}</p>
+                                <p>{{theEvent.description}}</p>
+                            </md-card-content>
+                            <md-card-footer>
+                                <md-chips ng-model="theEvent.tags" md-removable="false" readonly="true">
+                                    <md-chip-template>
+                                        <a href="#">{{$chip}}</a>
+                                    </md-chip-template>
+                                </md-chips>
+                            </md-card-footer>
+                        </md-card>
+                    </div>
+                    <div flex="25" layout="column">
+                        <md-card>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">WHEN?</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>{{theEvent.date | date:"EEE, MMMM d, y 'at' h:mm a"}}</p>
+                                <p>{{theEvent.date | date:"EEE, MMMM d, y 'at' h:mm a"}}</p>
+                            </md-card-content>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button class="md-raised md-primary">Add to calendar</md-button>
+                            </md-card-actions>
+                        </md-card>
+
+                        <md-card>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">WHERE?</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>{{theEvent.place.name}}</p>
+                                <p>{{theEvent.place.formatted_address}}</p>
+                            </md-card-content>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button class="md-raised md-primary">View Map</md-button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                </div>
+
+                <div layout="row" style="padding:8px; width: 100%;" flex>
+                    <div style="width:100%;" md-whiteframe="1">
+                        <ng-map style="display:block; width: 100%; height:100%;" zoom="14" center="{{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}" scrollwheel="false">
+                            <marker position="{{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}" title="{{theEvent.title}}"></marker>
+                        </ng-map>
+                        <div layout="column" layout-align="center center">
+                            <div>
+                                <h2 class="location-place-name">{{theEvent.place.name}}</h2>
+                            </div>
+                            <div class="location-place-address" ng-bind-html="theEvent.place.adr_address"></div>
+                        </div>
+                        <div flex="60" flex-offset="20">
+                            <md-divider></md-divider>
+                        </div>
+                        <div layout="row" layout-align="center center" style="margin: 15px;">
+                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=d" class="md-icon-button md-primary" aria-label="Car directions">
+                                <md-icon class="material-icons">directions_car</md-icon>
+                            </md-button>
+                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=w" class="md-icon-button md-primary" aria-label="Walking directions">
+                                <md-icon class="material-icons">directions_walk</md-icon>
+                            </md-button>
+                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=r" class="md-icon-button md-primary" aria-label="Bus directions">
+                                <md-icon class="material-icons">directions_bus</md-icon>
+                            </md-button>
+                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=b" class="md-icon-button md-primary" aria-label="Bike directions">
+                                <md-icon class="material-icons">directions_bike</md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-animate/angular-animate.js"></script>
+        <script src="../bower_components/angular-aria/angular-aria.js"></script>
+        <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script type="text/javascript" src="../bower_components/angular-material/angular-material.js"></script>
+        <script src="../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+        <script src="https://maps.google.com/maps/api/js?key=AIzaSyBDqBK3undYHvG5pWYBkESlkkX_c2GSLOw&libraries=placeses,visualization,drawing,geometry,places"></script>
+        <script src="../app.js"></script>
+    </body>
+</html>

@@ -5,3 +5,117 @@ html, body {
     margin: 0px;
     padding: 0px;
 }
+
+[md-header-picture] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 40%;
+    overflow: hidden;
+    background-size: 160%;
+    background-position: 50% 50%;
+}
+
+[scroll] {
+    position: fixed;
+    top: 0;
+}
+
+section {
+    height: 1600px;
+}
+
+i {
+    font-size: 24px;
+}
+
+.md-tools {
+    width: 40px;
+}
+
+.muted {
+    color: #bbb;
+    font-size: inherit;
+    font-weight: 700;
+    text-align: left;
+}
+
+.md-tile-left {
+    margin-right: 0!important;
+    padding-left: 24px;
+    color: rgb(76, 175, 80);
+}
+
+.tags {
+    display: inline;
+}
+
+.tags li {
+    display: inline;
+    list-style: none;
+}
+
+.tags li a, .tags li a:link, .tags li a:visited {
+    display: block;
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+md-card md-card-title md-card-title-media .md-media-lg {
+    background-color: #999999;
+    width: 760px;
+    height: 360px;
+}
+
+.date-month {
+    font-size: 24px !important;
+    font-weight: 500 !important;
+}
+
+.date-day {
+    font-size: 38px !important;
+    font-weight: 500 !important;
+    margin: 10px 0 20px 0;
+}
+
+.event-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 44px;
+}
+
+.title-card {
+    position: relative;
+}
+
+.title-place {
+    position: absolute;
+    bottom: 10px;
+    font-size: 18px;
+}
+
+md-chips.md-default-theme .md-chips, md-chips .md-chips {
+    box-shadow: none !important;
+}
+
+md-chips>md-chips-wrap>md-chip>div>md-chip-template>a {
+    text-decoration: none;
+    color: #212121;
+}
+
+.location-place-name {
+  font-size:30px;
+  font-weight: 400;
+}
+
+.location-place-address {
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #757575;
+}
+
+.postal-code {
+  display:none;
+}

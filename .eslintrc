@@ -153,6 +153,7 @@
     "couch": false,
     "define": true,
     "devel": false,
+    "document": true,
     "dojo": false,
     "describe": false,
     "expect": false,
