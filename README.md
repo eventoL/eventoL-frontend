@@ -1,5 +1,12 @@
 # eventoL-frontend
 
+<!-- ### Status -->
+### Issues
+[![Stories in in progress](https://badge.waffle.io/eventoL/eventoL-frontend.svg?label=in progress&title=In Progress)](http://waffle.io/eventoL/eventoL-frontend)
+[![Stories in Ready](https://badge.waffle.io/eventoL/eventoL-frontend.svg?label=ready&title=Ready)](http://waffle.io/eventoL/eventoL-frontend)
+[![Stories in Bug](https://badge.waffle.io/eventoL/eventoL-frontend.svg?label=bug&title=Bug)](http://waffle.io/eventoL/eventoL-frontend)
+[![Stories in Enhancement](https://badge.waffle.io/eventoL/eventoL-frontend.svg?label=enhancement&title=Enhancement)](http://waffle.io/eventoL/eventoL-frontend)
+
 ## Getting Started
 
 To get you started you can simply clone the eventoL-frontend repository and install the dependencies:
