@@ -12,6 +12,7 @@
     "angular-messages": "^1.5.8",
     "angular-material": "git+https://github.com/angular/bower-material.git#master",
     "ngmap": "^1.17.6",
-    "angular-sanitize": "^1.5.8"
+    "angular-sanitize": "^1.5.8",
+    "faker": "Faker#^3.1.0"
   }
 }

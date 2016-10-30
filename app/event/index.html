@@ -28,7 +28,7 @@
                     Log in
                 </md-button>
                 <md-button class="md-accent md-raised md-hue-3" aria-label="Learn More">
-                    Entradas
+                    Tickets
                 </md-button>
             </div>
         </md-toolbar>
@@ -69,17 +69,17 @@
         </md-toolbar>
 
         <md-content>
-            <div class='md-padding' layout="column" layout-align="center center" layout-wrap ng-controller="eventsCtrl" flex="90" flex-offset="5">
+            <div class='md-padding' layout="column" layout-align="center center" layout-wrap ng-controller="EventsCtrl as eventsCtrl" flex="90" flex-offset="5">
                 <md-card>
                     <md-card-title>
                         <md-card-title-text class="title-card">
-                            <span class="md-subhead date-month">{{theEvent.date | date:'MMM' | uppercase}}</span>
-                            <span class="md-subhead date-day">{{theEvent.date | date:'dd'}}</span>
-                            <span class="md-headline event-title">{{theEvent.title}}</span>
-                            <span class="title-place">{{theEvent.place.name}}</span>
+                            <span class="md-subhead date-month">{{eventsCtrl.theEvent.date | date:'MMM' | uppercase}}</span>
+                            <span class="md-subhead date-day">{{eventsCtrl.theEvent.date | date:'dd'}}</span>
+                            <span class="md-headline event-title">{{eventsCtrl.theEvent.title}}</span>
+                            <span class="title-place">{{eventsCtrl.theEvent.place.name}}</span>
                         </md-card-title-text>
                         <md-card-title-media>
-                            <div class="md-media-lg card-media" back-img="'{{theEvent.img}}'"></div>
+                            <div class="md-media-lg card-media" back-img="'{{eventsCtrl.theEvent.img}}'"></div>
                         </md-card-title-media>
                     </md-card-title>
                 </md-card>
@@ -90,16 +90,14 @@
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">About
-                                        {{theEvent.title}}</span>
+                                        {{eventsCtrl.theEvent.title}}</span>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
-                                <p>{{theEvent.description}}</p>
-                                <p>{{theEvent.description}}</p>
-                                <p>{{theEvent.description}}</p>
+                                <div ng-bind-html="eventsCtrl.theEvent.description"></div>
                             </md-card-content>
                             <md-card-footer>
-                                <md-chips ng-model="theEvent.tags" md-removable="false" readonly="true">
+                                <md-chips ng-model="eventsCtrl.theEvent.tags" md-removable="false" readonly="true">
                                     <md-chip-template>
                                         <a href="#">{{$chip}}</a>
                                     </md-chip-template>
@@ -115,8 +113,8 @@
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
-                                <p>{{theEvent.date | date:"EEE, MMMM d, y 'at' h:mm a"}}</p>
-                                <p>{{theEvent.date | date:"EEE, MMMM d, y 'at' h:mm a"}}</p>
+                                <p>{{eventsCtrl.theEvent.date | date:"EEE, MMMM d, y 'at' h:mm a"}}</p>
+                                <p>{{eventsCtrl.theEvent.date | date:"EEE, MMMM d, y 'at' h:mm a"}}</p>
                             </md-card-content>
                             <md-card-actions layout="row" layout-align="end center">
                                 <md-button class="md-raised md-primary">Add to calendar</md-button>
@@ -130,8 +128,8 @@
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
-                                <p>{{theEvent.place.name}}</p>
-                                <p>{{theEvent.place.formatted_address}}</p>
+                                <p>{{eventsCtrl.theEvent.place.name}}</p>
+                                <p>{{eventsCtrl.theEvent.place.formatted_address}}</p>
                             </md-card-content>
                             <md-card-actions layout="row" layout-align="end center">
                                 <md-button class="md-raised md-primary">View Map</md-button>
@@ -142,29 +140,45 @@
 
                 <div layout="row" style="padding:8px; width: 100%;" flex>
                     <div style="width:100%;" md-whiteframe="1">
-                        <ng-map style="display:block; width: 100%; height:100%;" zoom="14" center="{{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}" scrollwheel="false">
-                            <marker position="{{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}" title="{{theEvent.title}}"></marker>
+                        <ng-map style="display:block; width: 100%; height:100%;" zoom="14" center="{{eventsCtrl.theEvent.place.geometry.location.lat}},{{eventsCtrl.theEvent.place.geometry.location.lng}}" scrollwheel="false">
+                            <marker position="{{eventsCtrl.theEvent.place.geometry.location.lat}},{{eventsCtrl.theEvent.place.geometry.location.lng}}" title="{{eventsCtrl.theEvent.title}}"></marker>
                         </ng-map>
                         <div layout="column" layout-align="center center">
                             <div>
-                                <h2 class="location-place-name">{{theEvent.place.name}}</h2>
+                                <h2 class="location-place-name">{{eventsCtrl.theEvent.place.name}}</h2>
                             </div>
-                            <div class="location-place-address" ng-bind-html="theEvent.place.adr_address"></div>
+                            <div class="location-place-address" ng-bind-html="eventsCtrl.theEvent.place.adr_address"></div>
                         </div>
                         <div flex="60" flex-offset="20">
                             <md-divider></md-divider>
                         </div>
                         <div layout="row" layout-align="center center" style="margin: 15px;">
-                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=d" class="md-icon-button md-primary" aria-label="Car directions">
+                            <md-button
+                                target="_blank"
+                                ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{eventsCtrl.theEvent.place.geometry.location.lat}},{{eventsCtrl.theEvent.place.geometry.location.lng}}&dirflg=d"
+                                class="md-icon-button md-primary"
+                                aria-label="Car directions">
                                 <md-icon class="material-icons">directions_car</md-icon>
                             </md-button>
-                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=w" class="md-icon-button md-primary" aria-label="Walking directions">
+                            <md-button
+                                target="_blank"
+                                ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{eventsCtrl.theEvent.place.geometry.location.lat}},{{eventsCtrl.theEvent.place.geometry.location.lng}}&dirflg=w"
+                                class="md-icon-button md-primary"
+                                aria-label="Walking directions">
                                 <md-icon class="material-icons">directions_walk</md-icon>
                             </md-button>
-                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=r" class="md-icon-button md-primary" aria-label="Bus directions">
+                            <md-button
+                                target="_blank"
+                                ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{eventsCtrl.theEvent.place.geometry.location.lat}},{{eventsCtrl.theEvent.place.geometry.location.lng}}&dirflg=r"
+                                class="md-icon-button md-primary"
+                                aria-label="Bus directions">
                                 <md-icon class="material-icons">directions_bus</md-icon>
                             </md-button>
-                            <md-button target="_blank" ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{theEvent.place.geometry.location.lat}},{{theEvent.place.geometry.location.lng}}&dirflg=b" class="md-icon-button md-primary" aria-label="Bike directions">
+                            <md-button
+                                target="_blank"
+                                ng-href="https://maps.google.com/?saddr=Current+Location&daddr={{eventsCtrl.theEvent.place.geometry.location.lat}},{{eventsCtrl.theEvent.place.geometry.location.lng}}&dirflg=b"
+                                class="md-icon-button md-primary"
+                                aria-label="Bike directions">
                                 <md-icon class="material-icons">directions_bike</md-icon>
                             </md-button>
                         </div>
@@ -172,7 +186,7 @@
                 </div>
             </div>
         </md-content>
-
+        <script src="../bower_components/faker/build/build/faker.js"></script>
         <script src="../bower_components/angular/angular.js"></script>
         <script src="../bower_components/angular-animate/angular-animate.js"></script>
         <script src="../bower_components/angular-aria/angular-aria.js"></script>
@@ -181,5 +195,6 @@
         <script src="../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
         <script src="https://maps.google.com/maps/api/js?key=AIzaSyBDqBK3undYHvG5pWYBkESlkkX_c2GSLOw&libraries=placeses,visualization,drawing,geometry,places"></script>
         <script src="../app.js"></script>
+        <script src="./eventService.js"></script>
     </body>
 </html>

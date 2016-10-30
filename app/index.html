@@ -59,9 +59,9 @@
                     </div>
                 </md-toolbar>
             </header>
-            <section ng-controller="eventsCtrl">
+            <section ng-controller="EventsCtrl as eventsCtrl">
                 <div class='md-padding' layout="row" layout-align="center" layout-wrap>
-                    <md-card style="min-width: 300px; max-width: 600px" ng-repeat="event in events">
+                    <md-card style="min-width: 400px; max-width: 400px" ng-repeat="event in eventsCtrl.getSomeEvents()">
                         <img ng-src="{{event.img}}" class="md-card-image"></img>
                         <md-card-title>
                             <md-card-title-text>
@@ -70,19 +70,20 @@
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content>
-                            {{event.description}}
+                            {{event.place.name}}
                         </md-card-content>
                         <md-card-footer>
-                            <ul class="tags">
-                                <li ng-repeat="tag in event.tags">
-                                    <a href="#">#{{tag}}</a>
-                                </li>
-                            </ul>
+                            <md-chips ng-model="event.tags" md-removable="false" readonly="true">
+                                <md-chip-template>
+                                    <a href="#">{{$chip}}</a>
+                                </md-chip-template>
+                            </md-chips>
                         </md-card-footer>
                     </md-card>
                 </div>
             </section>
 
+            <script src="../bower_components/faker/build/build/faker.js"></script>
             <script src="./bower_components/angular/angular.js"></script>
             <script src="./bower_components/angular-sanitize/angular-sanitize.js"></script>
             <script src="./bower_components/angular-animate/angular-animate.js"></script>
@@ -91,5 +92,6 @@
             <script src="./bower_components/ngmap/build/scripts/ng-map.min.js"></script>
             <script src="https://maps.google.com/maps/api/js?key=AIzaSyBDqBK3undYHvG5pWYBkESlkkX_c2GSLOw&libraries=placeses,visualization,drawing,geometry,places"></script>
             <script src="./app.js"></script>
+            <script src="./event/eventService.js"></script>
         </body>
     </html>
