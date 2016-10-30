@@ -1,0 +1,52 @@
+<md-toolbar ng-attr-scroll="{{ $ctrl.scroll ? true : undefined }}" ng-show="!showSearch" md-whiteframe="3">
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>{{ $ctrl.title }}</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-tools" aria-label="Search" ng-click="showSearch = !showSearch">
+            <md-icon aria-label="search" class="material-icons">search</md-icon>
+        </md-button>
+        <md-button class="md-tools" aria-label="Log In">
+            Log in
+        </md-button>
+        <md-button ng-if="$ctrl.event" class="md-accent md-raised md-hue-3" aria-label="Get Tickets">
+            Tickets
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-toolbar ng-attr-scroll="{{ $ctrl.scroll ? true : undefined }}" ng-show="showSearch" md-whiteframe="3">
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>{{ $ctrl.title }}</span>
+        </h2>
+        <md-button class="md-tools" aria-label="Go Back" ng-click="showSearch = !showSearch">
+            <md-icon aria-label="keyboard_arrow_left" class="material-icons">keyboard_arrow_left</md-icon>
+        </md-button>
+        <md-autocomplete
+            md-no-cache="false"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.display"
+            md-min-length="0"
+            placeholder="Start typing to search for events"
+            flex>
+            <md-item-template>
+                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+            <md-not-found>
+                No events matching "{{ctrl.searchText}}" were found.
+            </md-not-found>
+        </md-autocomplete>
+        <md-button class="md-tools" aria-label="Log In">
+            Log in
+        </md-button>
+        <md-button ng-if="$ctrl.event" class="md-accent md-raised md-hue-3" aria-label="Get Tickets">
+            Tickets
+        </md-button>
+    </div>
+</md-toolbar>
